@@ -1,0 +1,26 @@
+# Template file for 'packet-tracer'
+pkgname=cisco-packet-tracer
+version=8.2.1
+revision=1
+archs="x86_64"
+depends="xdg-utils"
+short_desc="Network Simulation Tool from Cisco"
+maintainer="Sigge Rajamäe <siggerajamae@gmail.com>"
+license="custom:Proprietary"
+homepage="https://www.netacad.com"
+distfiles="https://archive.org/download/cisco-packet-tracer-821-ubuntu-64bit/CiscoPacketTracer_821_Ubuntu_64bit.deb"
+checksum="428338ac32a474d4c9e930433c202cfa5d7b24b9eca50165972f41eb484e07ba"
+restricted=yes
+repository=nonfree
+nopie=yes
+
+post_extract() {
+  chmod -R 755 opt
+}
+
+do_install() {
+  vcopy opt /
+  vcopy usr /
+  vmkdir usr/bin
+  ln -s /opt/pt/packettracer ${DESTDIR}/usr/bin/packettracer
+}
